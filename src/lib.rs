@@ -9,7 +9,7 @@
     unused_qualifications
 )]
 
-//! The `par-array-init` crate allows you to initialize arrays with an initializer closure that will be called in parallel to fill the array.
+//! The `par_array_init` crate allows you to initialize arrays with an initializer closure that will be called in parallel to fill the array.
 //!
 //! This crate mirrors the api of crate (array-init)[https://crates.io/crates/array-init] with the caveat that initialization is performed in parallel.
 //! An important departure from `array-init`, initialization order is not deterministic and should not be relied on.
@@ -20,11 +20,10 @@
 //! ```rust
 //! # extern crate par_array_init;
 //! # extern crate rayon;
-//!
 //! // Initialize an array of length 10 containing successive squares
 //! let arr: [usize; 50] = par_array_init::par_array_init(|i| i * i);
 //!
-//! // Initialize an array from an iterator producing an array of 34 repeated
+//! // Initialize an array from an iterator producing an array filled with 34's
 //! let mut iter = rayon::iter::repeat(34u32);
 //! let arr: [u32; 50] = par_array_init::from_par_iter(iter);
 //! ```

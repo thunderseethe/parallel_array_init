@@ -18,6 +18,6 @@ let arr: [usize; 50] = par_array_init(|i| i * i);
 
 // Initialize an array from an iterator producing an array of 34 repeated
 
-let mut iter = rayon::iter::repeat(34u32);
-let arr: [u32; 50] = from_par_iter(iter);
+let mut iter = rayon::iter::repeat(34u32).take(50);
+let arr: Option<[u32; 50]> = from_par_iter(iter);
 ```

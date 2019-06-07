@@ -24,8 +24,8 @@
 //! let arr: [usize; 50] = par_array_init::par_array_init(|i| i * i);
 //!
 //! // Initialize an array from an iterator producing an array filled with 34's
-//! let mut iter = rayon::iter::repeat(34u32);
-//! let arr: [u32; 50] = par_array_init::from_par_iter(iter);
+//! let mut iter = rayon::iter::repeat(34u32).take(50);
+//! let arr: Option<[u32; 50]> = par_array_init::from_par_iter(iter);
 //! ```
 //!
 extern crate array_init;

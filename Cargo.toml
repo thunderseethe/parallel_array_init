@@ -1,0 +1,14 @@
+[package]
+name = "par-array-init"
+version = "0.0.4"
+authors = ["thunderseethe <thunderseethe.dev@gmail.com>"]
+repository = "https://github.com/thunderseethe/parallel_array_init"
+homepage = "https://github.com/thunderseethe/parallel_array_init"
+license = "MIT"
+documentation = "https://docs.rs/par-array-init"
+readme = "README.md"
+edition = "2018"
+
+[dependencies]
+array-init = "0.0.4"
+rayon = "1.0.3"

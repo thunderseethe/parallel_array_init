@@ -8,6 +8,8 @@ license = "MIT"
 documentation = "https://docs.rs/par-array-init"
 readme = "README.md"
 edition = "2018"
+categories = ["data-structures", "concurrency"]
+keywords = ["parallel", "array", "initialization"]
 
 [dependencies]
 array-init = "0.0.4"

@@ -19,15 +19,14 @@
 //! # Examples:
 //! ```rust
 //! # extern crate par_array_init;
+//! # extern crate rayon;
 //!
 //! // Initialize an array of length 10 containing successive squares
-//!
 //! let arr: [usize; 50] = par_array_init::par_array_init(|i| i * i);
 //!
 //! // Initialize an array from an iterator producing an array of 34 repeated
-//!
 //! let mut iter = rayon::iter::repeat(34u32);
-//! let arr: [u32; 50] = par_array_init::from_iter(iter);
+//! let arr: [u32; 50] = par_array_init::from_par_iter(iter);
 //! ```
 //!
 extern crate array_init;
@@ -45,7 +44,7 @@ where
 {
     let elems = (0..Array::len()).into_par_iter().map(|i| initializer(i));
     // Since our iterator is 0..len here we're safe to unwrap
-    from_iter(elems).unwrap()
+    from_par_iter(elems).unwrap()
 }
 
 /// Initialize an array given a parallel iterator.
@@ -53,7 +52,7 @@ where
 /// IndexedParallelIterator is required (as opposed to just ParallelIterator) so we know we have atleast as many elements as array length.
 ///
 /// Takes elements from the iterator until the Array is full, returns full array on completion. Returns None if there are not enough elements.
-pub fn from_iter<Array, I>(into_iter: I) -> Option<Array>
+pub fn from_par_iter<Array, I>(into_iter: I) -> Option<Array>
 where
     I: IntoParallelIterator<Item = Array::Item>,
     I::Iter: IndexedParallelIterator<Item = Array::Item>,
@@ -161,14 +160,14 @@ mod test {
     #[test]
     fn test_from_iter_works() {
         let vec = vec![1, 2, 3, 4];
-        let array: Option<[usize; 4]> = from_iter(vec.into_par_iter());
+        let array: Option<[usize; 4]> = from_par_iter(vec.into_par_iter());
         assert_eq!(array, Some([1, 2, 3, 4]));
     }
 
     #[test]
     fn test_from_iter_fails_when_len_is_different() {
         let vec = vec![1, 2, 3, 4];
-        let array: Option<[usize; 10]> = from_iter(vec.into_par_iter());
+        let array: Option<[usize; 10]> = from_par_iter(vec.into_par_iter());
         assert_eq!(array, None);
     }
 
@@ -179,7 +178,7 @@ mod test {
             "A lame string",
             "A longish string abcdefghijklmnopqrstuvwxyz",
         ];
-        let array: Option<[&str; 3]> = from_iter(vec.into_par_iter());
+        let array: Option<[&str; 3]> = from_par_iter(vec.into_par_iter());
         assert_eq!(
             array,
             Some([

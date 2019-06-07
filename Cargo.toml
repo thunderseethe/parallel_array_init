@@ -1,6 +1,6 @@
 [package]
 name = "par-array-init"
-version = "0.0.4"
+version = "0.0.5"
 authors = ["thunderseethe <thunderseethe.dev@gmail.com>"]
 repository = "https://github.com/thunderseethe/parallel_array_init"
 homepage = "https://github.com/thunderseethe/parallel_array_init"
